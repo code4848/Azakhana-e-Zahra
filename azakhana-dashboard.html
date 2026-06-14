@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azakhana e Zahra S.A. — Membership Campaign Muharram 1447</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0a0f; }
+  #dashboard { background: #0a0a0f; color: #e8d9b0; font-family: Arial, sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+
+  .band { background: linear-gradient(90deg, #8B1A1A 0%, #B8860B 25%, #8B1A1A 50%, #B8860B 75%, #8B1A1A 100%); height: 8px; width: 100%; flex-shrink: 0; }
+  .content { display: flex; flex-direction: column; padding: 0 28px 16px; flex: 1; }
+
+  /* ── CTA — top, big and bold ── */
+  .cta-banner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: linear-gradient(135deg, rgba(139,26,26,0.35) 0%, rgba(184,134,11,0.15) 50%, rgba(139,26,26,0.35) 100%);
+    border: 1px solid rgba(184,134,11,0.5);
+    border-left: 5px solid #B8860B;
+    border-right: 5px solid #B8860B;
+    border-radius: 12px;
+    padding: 20px 26px;
+    margin: 14px 0 12px;
+  }
+  .cta-icon    { font-size: 28px; flex-shrink: 0; opacity: 0.85; }
+  .cta-content { flex: 1; text-align: center; }
+  .cta-title {
+    font-family: 'Amiri', Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #d4a820;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+  .cta-msg {
+    font-size: 17px;
+    color: rgba(232,217,176,0.92);
+    line-height: 1.75;
+    max-width: 860px;
+    margin: 0 auto;
+    font-weight: 500;
+  }
+  .cta-msg strong { color: #f5c842; font-weight: 700; font-size: 19px; }
+
+  /* ── HERO ── */
+  .hero { text-align: center; padding: 16px 0 12px; border-bottom: 2px solid rgba(184,134,11,0.4); margin-bottom: 12px; }
+  .hero-main { font-family: 'Amiri', Georgia, serif; font-size: 42px; font-weight: 700; color: #d4a820; line-height: 1.2; letter-spacing: 0.02em; }
+  .hero-sub  { font-size: 20px; font-weight: 600; color: #e8d9b0; margin-top: 6px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .pulse-dot { width: 8px; height: 8px; background: #e84040; border-radius: 50%; animation: pulseDot 1.4s ease-in-out infinite; flex-shrink: 0; }
+  @keyframes pulseDot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.5)} }
+
+  /* ── QUOTE ── */
+  .quote-banner { text-align: center; margin-bottom: 12px; padding: 10px 0 8px; border-bottom: 1px solid rgba(184,134,11,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; }
+  .quote-mark   { font-family: 'Amiri', Georgia, serif; font-size: 44px; color: rgba(184,134,11,0.3); line-height: 0.5; margin-bottom: 6px; }
+  .quote-text   { font-family: 'Amiri', Georgia, 'Times New Roman', serif; font-size: 20px; font-weight: 700; line-height: 1.65; color: #f5e6b8; max-width: 860px; }
+  .quote-source { font-size: 12px; color: #B8860B; margin-top: 8px; letter-spacing: 0.07em; font-weight: 500; }
+  .quote-dots   { display: flex; gap: 7px; justify-content: center; margin-top: 8px; }
+  .q-dot        { width: 7px; height: 7px; border-radius: 50%; background: rgba(184,134,11,0.3); cursor: pointer; transition: background 0.3s; }
+  .q-dot.active { background: #B8860B; }
+  .quote-fade   { animation: fadeQ 0.5s ease; }
+  @keyframes fadeQ { 0%{opacity:0;transform:translateY(5px)} 100%{opacity:1;transform:translateY(0)} }
+
+  /* ── TICKER ── */
+  .ticker-wrap  { background: rgba(184,134,11,0.12); border-top: 1px solid rgba(184,134,11,0.25); border-bottom: 1px solid rgba(184,134,11,0.25); padding: 10px 0; overflow: hidden; margin-bottom: 14px; }
+  .ticker-inner { display: flex; gap: 80px; animation: ticker 36s linear infinite; white-space: nowrap; }
+  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  .ticker-item  { font-size: 16px; font-weight: 700; color: #d4a820; letter-spacing: 0.05em; }
+  .ticker-sep   { color: rgba(184,134,11,0.4); font-size: 16px; }
+
+  /* ── GRID ── */
+  .main-grid { display: grid; grid-template-columns: 270px 1fr 270px; gap: 16px; flex: 1; }
+  .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(184,134,11,0.25); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; }
+  .card-title { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #B8860B; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-weight: 700; }
+  .card-title::before { content: ''; display: inline-block; width: 14px; height: 1px; background: #B8860B; }
+
+  /* ── LEFT ── */
+  .left-col { display: flex; flex-direction: column; gap: 12px; }
+  .qr-card  { background: rgba(255,255,255,0.04); border: 1px solid rgba(184,134,11,0.25); border-radius: 14px; padding: 14px; text-align: center; }
+  #qr-canvas { width: 130px; height: 130px; background: #fff; border-radius: 6px; margin: 0 auto 8px; overflow: hidden; }
+  .qr-label  { font-size: 12px; color: #e88080; font-weight: 600; }
+  .acct-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(184,134,11,0.25); border-radius: 14px; padding: 14px; }
+  .acct-row  { display: flex; justify-content: space-between; font-size: 11px; padding: 5px 0; border-bottom: 1px solid rgba(184,134,11,0.1); gap: 8px; }
+  .acct-row:last-child { border-bottom: none; }
+  .acct-key  { color: rgba(232,217,176,0.5); flex-shrink: 0; }
+  .acct-val  { color: #e8d9b0; font-weight: 600; text-align: right; word-break: break-all; font-size: 10px; }
+  .contact-card { background: rgba(139,26,26,0.15); border: 1px solid rgba(139,26,26,0.4); border-radius: 14px; padding: 14px; }
+  .contact-row  { display: flex; align-items: flex-start; gap: 8px; font-size: 11px; color: rgba(232,217,176,0.85); margin-bottom: 8px; line-height: 1.5; }
+  .contact-row:last-child { margin-bottom: 0; }
+  .contact-icon { color: #e88080; flex-shrink: 0; font-size: 14px; }
+
+  /* ── MIDDLE GAUGE ── */
+  .gauge-card  { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .gauge-wrap  { display: flex; flex-direction: column; align-items: center; width: 100%; }
+  .gauge-numbers { display: flex; align-items: baseline; gap: 8px; margin-top: 10px; }
+  .gauge-current { font-size: 68px; font-weight: 500; color: #e8d9b0; line-height: 1; }
+  .gauge-sep     { font-size: 34px; color: rgba(184,134,11,0.5); }
+  .gauge-target  { font-size: 34px; color: #B8860B; line-height: 1; }
+  .gauge-label   { font-size: 12px; color: rgba(232,217,176,0.5); margin-top: 5px; }
+  .progress-outer { width: 90%; height: 18px; background: rgba(255,255,255,0.06); border-radius: 9px; border: 1px solid rgba(184,134,11,0.2); overflow: hidden; margin-top: 16px; }
+  .progress-inner { height: 100%; border-radius: 9px; background: linear-gradient(90deg, #8B1A1A 0%, #B8860B 60%, #d4a820 100%); transition: width 1.5s cubic-bezier(.4,0,.2,1); position: relative; }
+  .progress-inner::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 20px; background: rgba(255,255,255,0.25); border-radius: 9px; animation: shimmer 2s ease-in-out infinite; }
+  @keyframes shimmer { 0%,100%{opacity:0} 50%{opacity:1} }
+  .progress-pct { font-size: 12px; color: #B8860B; margin-top: 5px; font-weight: 600; }
+  .milestones { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; width: 88%; }
+  .milestone  { display: flex; align-items: center; gap: 10px; font-size: 12px; color: rgba(232,217,176,0.5); }
+  .milestone.reached { color: #B8860B; font-weight: 600; }
+  .m-dot { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid rgba(184,134,11,0.4); flex-shrink: 0; }
+  .milestone.reached .m-dot { background: #B8860B; border-color: #B8860B; }
+  @keyframes sway { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(4deg)} }
+  .lamp-anim { animation: sway 4s ease-in-out infinite; transform-origin: top center; }
+
+  /* ── RIGHT ── */
+  .fee-card-primary { background: rgba(139,26,26,0.15); border: 1px solid rgba(139,26,26,0.4); border-radius: 14px; padding: 20px; flex: 1; display: flex; flex-direction: column; }
+  .fee-main   { text-align: center; padding: 18px 0; border-bottom: 1px solid rgba(184,134,11,0.15); margin-bottom: 16px; }
+  .fee-amount { font-size: 58px; font-weight: 500; color: #d4a820; line-height: 1; }
+  .fee-period { font-size: 14px; color: rgba(232,217,176,0.5); margin-top: 5px; }
+  .fee-tag    { display: inline-block; background: rgba(139,26,26,0.5); border: 1px solid rgba(139,26,26,0.7); border-radius: 14px; font-size: 12px; color: #e88080; padding: 4px 16px; margin-top: 8px; font-weight: 700; letter-spacing: 0.06em; }
+  .benefit-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .benefit-list li { font-size: 13px; color: rgba(232,217,176,0.8); display: flex; align-items: flex-start; gap: 9px; line-height: 1.55; }
+  .benefit-list li::before { content: '\25C6'; color: #B8860B; font-size: 7px; margin-top: 5px; flex-shrink: 0; }
+  .flex-strip { background: rgba(184,134,11,0.06); border: 1px solid rgba(184,134,11,0.2); border-radius: 10px; padding: 11px 13px; margin-top: 14px; display: flex; align-items: center; gap: 12px; }
+  .flex-strip-amount { font-size: 20px; font-weight: 700; color: #B8860B; white-space: nowrap; }
+  .flex-strip-text   { font-size: 11px; color: rgba(232,217,176,0.5); line-height: 1.5; }
+
+  /* ── BOTTOM ── */
+  .bottom-bar { text-align: center; padding: 10px 0 6px; border-top: 1px solid rgba(184,134,11,0.25); margin-top: 14px; }
+  .bottom-bar-text { font-size: 13px; color: rgba(184,134,11,0.6); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ── ADMIN ── */
+  .admin-btn    { position: fixed; bottom: 12px; right: 14px; z-index: 100; background: rgba(184,134,11,0.1); border: 1px solid rgba(184,134,11,0.3); border-radius: 8px; color: #B8860B; font-size: 10px; padding: 5px 12px; cursor: pointer; }
+  .admin-panel  { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; }
+  .admin-panel.open { display: flex; }
+  .admin-box    { background: #141420; border: 1px solid rgba(184,134,11,0.5); border-radius: 14px; padding: 28px; min-width: 320px; display: flex; flex-direction: column; gap: 16px; }
+  .admin-box h3 { color: #B8860B; font-size: 15px; font-weight: 600; }
+  .admin-field  { display: flex; flex-direction: column; gap: 6px; }
+  .admin-field label { font-size: 10px; color: rgba(232,217,176,0.6); letter-spacing: 0.08em; text-transform: uppercase; }
+  .admin-field input { background: rgba(255,255,255,0.06); border: 1px solid rgba(184,134,11,0.3); border-radius: 8px; color: #e8d9b0; font-size: 15px; padding: 8px 12px; width: 100%; }
+  .admin-actions { display: flex; gap: 10px; }
+  .btn-save   { flex: 1; background: #8B1A1A; border: none; border-radius: 8px; color: #e8d9b0; font-size: 13px; padding: 10px; cursor: pointer; }
+  .btn-cancel { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(184,134,11,0.3); border-radius: 8px; color: rgba(232,217,176,0.6); font-size: 13px; padding: 10px; cursor: pointer; }
+
+  @media (max-width: 900px) {
+    .content { padding: 0 12px 14px; }
+    .main-grid { grid-template-columns: 1fr; }
+    .hero-main { font-size: 28px; }
+    .hero-sub  { font-size: 15px; }
+    .cta-title { font-size: 22px; }
+    .cta-msg   { font-size: 14px; }
+    .quote-text { font-size: 16px; }
+    .gauge-current { font-size: 50px; }
+    .fee-amount { font-size: 44px; }
+    .ticker-item { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<div id="dashboard">
+  <div class="band"></div>
+  <div class="content">
+
+    <!-- ══ HERO TITLE ══ -->
+    <div class="hero">
+      <div class="hero-main">Azakhana e Zahra S.A.</div>
+      <div class="hero-sub">Membership Campaign &nbsp;&middot;&nbsp; Muharram 1447</div>
+    </div>
+
+    <!-- ══ CTA ══ -->
+    <div class="cta-banner">
+      <div class="cta-icon">&#10024;</div>
+      <div class="cta-content">
+        <div class="cta-title">Be the Reason This Centre Stays Open</div>
+        <div class="cta-msg">Every member that joins brings us one step closer to our target of <strong>200 paid members</strong>. Your monthly contribution of &euro;100 &mdash; less than &euro;3.50 a day &mdash; keeps the doors of Azakhana e Zahra S.A. open for every Momin in Dublin. This is your Hussainiyah. Own it. Protect it. Strengthen it.</div>
+      </div>
+      <div class="cta-icon">&#10024;</div>
+    </div>
+
+    <!-- ══ QUOTE ══ -->
+    <div class="quote-banner">
+      <div class="quote-mark">"</div>
+      <div class="quote-text" id="quote-text"></div>
+      <div class="quote-source" id="quote-source"></div>
+      <div class="quote-dots" id="quote-dots"></div>
+    </div>
+
+    <!-- ══ TICKER ══ -->
+    <div class="ticker-wrap">
+      <div class="ticker-inner">
+        <span class="ticker-item">Join as a Paid Member &mdash; &euro;100/month keeps this centre alive</span>
+        <span class="ticker-sep">&loz;</span>
+        <span class="ticker-item">Can&apos;t manage &euro;100? Contribute as little as &euro;20/month &mdash; every euro counts</span>
+        <span class="ticker-sep">&loz;</span>
+        <span class="ticker-item">Scan the QR code to donate &middot; Contact admin to become a member</span>
+        <span class="ticker-sep">&loz;</span>
+        <span class="ticker-item">Majlis Tonight &mdash; All Momineen are welcome</span>
+        <span class="ticker-sep">&loz;</span>
+        <span class="ticker-item">Join as a Paid Member &mdash; &euro;100/month keeps this centre alive</span>
+        <span class="ticker-sep">&loz;</span>
+        <span class="ticker-item">Can&apos;t manage &euro;100? Contribute as little as &euro;20/month &mdash; every euro counts</span>
+        <span class="ticker-sep">&loz;</span>
+        <span class="ticker-item">Scan the QR code to donate &middot; Contact admin to become a member</span>
+        <span class="ticker-sep">&loz;</span>
+        <span class="ticker-item">Majlis Tonight &mdash; All Momineen are welcome</span>
+      </div>
+    </div>
+
+    <!-- ══ MAIN GRID ══ -->
+    <div class="main-grid">
+
+      <!-- LEFT -->
+      <div class="left-col">
+        <div class="qr-card">
+          <div class="card-title" style="justify-content:center">Scan to Donate</div>
+          <div id="qr-canvas"></div>
+          <div class="qr-label">&hearts; Support Azakhana e Zahra S.A.</div>
+        </div>
+        <div class="acct-card">
+          <div class="card-title">Account Details</div>
+          <div class="acct-row"><span class="acct-key">Account Name</span><span class="acct-val">Azakhana e Zahra S.A.</span></div>
+          <div class="acct-row"><span class="acct-key">Bank</span><span class="acct-val">AIB</span></div>
+          <div class="acct-row"><span class="acct-key">IBAN</span><span class="acct-val" id="iban-val">IE BIK 1234 5343432</span></div>
+          <div class="acct-row"><span class="acct-key">Membership</span><span class="acct-val">&euro;100 / month</span></div>
+          <div class="acct-row"><span class="acct-key">Min. Donation</span><span class="acct-val" style="color:#d4a820">&euro;20 / month</span></div>
+        </div>
+        <div class="contact-card">
+          <div class="card-title">Become a Member</div>
+          <div class="contact-row"><span class="contact-icon">&#9742;</span><span id="contact-phone">089 1234 5678</span></div>
+          <div class="contact-row"><span class="contact-icon">&#9679;</span><span>Azakhana e Zahra S.A., Dublin</span></div>
+          <div class="contact-row"><span class="contact-icon">&euro;</span><span>Cash, Bank Transfer or Revolut accepted</span></div>
+        </div>
+      </div>
+
+      <!-- MIDDLE GAUGE -->
+      <div class="card gauge-card">
+        <div style="text-align:center;margin-bottom:14px">
+          <div style="font-family:'Amiri',Georgia,serif;font-size:28px;font-weight:700;color:#d4a820;letter-spacing:0.03em;line-height:1.2">Muharram Membership Drive</div>
+        </div>
+        <div class="gauge-wrap">
+          <svg width="260" height="155" viewBox="0 0 260 155" role="img" aria-label="Membership gauge">
+            <defs>
+              <linearGradient id="arcGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#8B1A1A"/>
+                <stop offset="100%" stop-color="#B8860B"/>
+              </linearGradient>
+            </defs>
+            <path d="M28,142 A102,102 0 0,1 232,142" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="16" stroke-linecap="round"/>
+            <path id="gauge-arc" d="M28,142 A102,102 0 0,1 232,142" fill="none" stroke="url(#arcGrad)" stroke-width="16" stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="282"/>
+            <line id="gauge-needle" x1="130" y1="142" x2="52" y2="118" stroke="#B8860B" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="130" cy="142" r="7" fill="#B8860B"/>
+            <text x="22"  y="152" text-anchor="middle" font-size="11" fill="rgba(232,217,176,0.35)" font-family="Arial">0</text>
+            <text x="130" y="34"  text-anchor="middle" font-size="11" fill="rgba(232,217,176,0.35)" font-family="Arial">100</text>
+            <text id="gauge-top-label" x="238" y="152" text-anchor="middle" font-size="11" fill="rgba(232,217,176,0.35)" font-family="Arial">200</text>
+          </svg>
+          <div class="gauge-numbers">
+            <div class="gauge-current" id="disp-current">24</div>
+            <div class="gauge-sep">/</div>
+            <div class="gauge-target" id="disp-target">200</div>
+          </div>
+          <div class="gauge-label">Paid Members &nbsp;/&nbsp; Muharram Target</div>
+          <div class="progress-outer">
+            <div class="progress-inner" id="prog-bar" style="width:12%"></div>
+          </div>
+          <div class="progress-pct" id="prog-pct">12% of target reached</div>
+          <div class="milestones">
+            <div class="milestone" id="ms-25"><div class="m-dot"></div>50 members &mdash; First goal</div>
+            <div class="milestone" id="ms-50"><div class="m-dot"></div>100 members &mdash; Halfway milestone</div>
+            <div class="milestone" id="ms-75"><div class="m-dot"></div>150 members &mdash; Strong community</div>
+            <div class="milestone" id="ms-100"><div class="m-dot"></div>200 members &mdash; Muharram target</div>
+          </div>
+          <div style="margin-top:18px">
+            <svg width="38" height="56" viewBox="0 0 40 60" class="lamp-anim" role="presentation">
+              <line x1="20" y1="0" x2="20" y2="10" stroke="rgba(184,134,11,0.5)" stroke-width="1.5"/>
+              <ellipse cx="20" cy="14" rx="8" ry="4" fill="rgba(184,134,11,0.3)" stroke="#B8860B" stroke-width="1"/>
+              <path d="M12,14 Q10,34 14,42 Q20,50 26,42 Q30,34 28,14 Z" fill="rgba(184,134,11,0.15)" stroke="#B8860B" stroke-width="1"/>
+              <ellipse cx="20" cy="42" rx="6" ry="3" fill="rgba(184,134,11,0.2)" stroke="#B8860B" stroke-width="1"/>
+              <ellipse cx="20" cy="14" rx="4" ry="2" fill="#d4a820" opacity="0.7"/>
+              <ellipse cx="20" cy="14" rx="2" ry="1" fill="#fff8c0" opacity="0.9"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div style="display:flex;flex-direction:column">
+        <div class="fee-card-primary">
+          <div class="card-title">Full Membership</div>
+          <div class="fee-main">
+            <div class="fee-amount">&euro;100</div>
+            <div class="fee-period">per month</div>
+            <div class="fee-tag">Join Today</div>
+          </div>
+          <ul class="benefit-list">
+            <li>Sustains nightly Majlis during Muharram</li>
+            <li>Covers rent, utilities &amp; operations</li>
+            <li>Keeps this Hussainiyah alive in Dublin</li>
+            <li>Strengthens our community for future generations</li>
+          </ul>
+          <div class="flex-strip">
+            <div class="flex-strip-amount">&euro;20+</div>
+            <div class="flex-strip-text">Can&apos;t manage &euro;100? Any amount from &euro;20/month is welcome &mdash; every euro helps.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="bottom-bar">
+      <div class="bottom-bar-text">Azakhana e Zahra S.A. &nbsp;&middot;&nbsp; Hussainiyah &nbsp;&middot;&nbsp; Dublin, Ireland</div>
+    </div>
+
+  </div>
+  <div class="band"></div>
+</div>
+
+<div class="admin-panel" id="admin-panel">
+  <div class="admin-box">
+    <h3>Update Dashboard</h3>
+    <div class="admin-field"><label>Current Paid Members</label><input type="number" id="inp-current" value="24" min="0" max="9999"></div>
+    <div class="admin-field"><label>Target Members</label><input type="number" id="inp-target" value="200" min="1" max="9999"></div>
+    <div class="admin-field"><label>IBAN / Account Number</label><input type="text" id="inp-iban" placeholder="IE BIK 1234 5343432"></div>
+    <div class="admin-field"><label>Contact Phone</label><input type="text" id="inp-phone" placeholder="089 1234 5678"></div>
+    <div class="admin-actions">
+      <button class="btn-save" onclick="saveAdmin()">Save &amp; Update</button>
+      <button class="btn-cancel" onclick="closeAdmin()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<button class="admin-btn" onclick="openAdmin()">&#9881; Update</button>
+
+<script>
+var quotes = [
+  { text: "Generosity is to help a deserving person without their request — for giving after being asked is either out of self-respect or to avoid rebuke.", source: "Imam Ali ibn Abi Talib (A.S.) — Nahj al-Balagha, Saying 53" },
+  { text: "Do not feel ashamed if the amount of charity is small, because to refuse the needy is an act of greater shame.", source: "Imam Ali ibn Abi Talib (A.S.) — Nahj al-Balagha" },
+  { text: "Protect your belief by charity; guard your wealth by paying Allah's share; and ward off the waves of calamity by praying.", source: "Imam Ali ibn Abi Talib (A.S.) — Nahj al-Balagha, Saying 146" },
+  { text: "Charity does not in any way decrease wealth — and the one who shows humility, Allah elevates in the estimation of the people.", source: "Imam Muhammad al-Baqir (A.S.) — Usul al-Kafi, Book of Faith and Belief" },
+  { text: "Surely, Allah has chosen for us followers who assist us and are happy at our happiness, and are sad in our sadness.", source: "Imam Ali ibn Abi Talib (A.S.) — Ghurar al-Hikam, vol. 1, p. 135" },
+  { text: "He whose eyes shed tears for our blood which has been shed, or for our rights which have been usurped — Allah shall accommodate him in paradise for a long time.", source: "Imam Ja'far al-Sadiq (A.S.) — Amali Sheikh al-Mufid, p. 175" }
+];
+
+var qIdx = 0, currentMembers = 24, targetMembers = 200;
+
+function renderQuote(i) {
+  var el = document.getElementById('quote-text');
+  var sr = document.getElementById('quote-source');
+  el.classList.remove('quote-fade'); void el.offsetWidth; el.classList.add('quote-fade');
+  el.textContent = quotes[i].text;
+  sr.textContent = '— ' + quotes[i].source;
+  document.querySelectorAll('.q-dot').forEach(function(d,j){ d.classList.toggle('active', j===i); });
+}
+
+function initDots() {
+  var wrap = document.getElementById('quote-dots');
+  wrap.innerHTML = '';
+  quotes.forEach(function(_,i) {
+    var d = document.createElement('div');
+    d.className = 'q-dot' + (i===0?' active':'');
+    d.onclick = function(){ qIdx=i; renderQuote(i); };
+    wrap.appendChild(d);
+  });
+}
+
+function updateDashboard(current, target) {
+  currentMembers = current; targetMembers = target;
+  var pct = Math.min(100, Math.round((current/target)*100));
+  document.getElementById('disp-current').textContent = current;
+  document.getElementById('disp-target').textContent  = target;
+  document.getElementById('gauge-top-label').textContent = target;
+  document.getElementById('prog-bar').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '% of target reached';
+  document.getElementById('gauge-arc').setAttribute('stroke-dashoffset', (320 - 320*pct/100).toFixed(1));
+  var rad = (200 + 140*pct/100) * Math.PI / 180;
+  document.getElementById('gauge-needle').setAttribute('x2', (130 + 74*Math.cos(rad)).toFixed(1));
+  document.getElementById('gauge-needle').setAttribute('y2', (142 + 74*Math.sin(rad)).toFixed(1));
+  var t25=Math.round(target*.25), t50=Math.round(target*.5), t75=Math.round(target*.75);
+  [
+    {id:'ms-25', val:t25,    lbl:t25+' members \u2014 First goal'},
+    {id:'ms-50', val:t50,    lbl:t50+' members \u2014 Halfway milestone'},
+    {id:'ms-75', val:t75,    lbl:t75+' members \u2014 Strong community'},
+    {id:'ms-100',val:target,  lbl:target+' members \u2014 Muharram target'},
+  ].forEach(function(m) {
+    var el = document.getElementById(m.id); if (!el) return;
+    var reached = current >= m.val;
+    el.className = 'milestone'+(reached?' reached':'');
+    el.innerHTML = '<div class="m-dot"></div>'+m.lbl+(reached?' \u2713':'');
+  });
+}
+
+function openAdmin()  { document.getElementById('admin-panel').classList.add('open'); }
+function closeAdmin() { document.getElementById('admin-panel').classList.remove('open'); }
+
+function saveAdmin() {
+  var c = parseInt(document.getElementById('inp-current').value)||currentMembers;
+  var t = parseInt(document.getElementById('inp-target').value) ||targetMembers;
+  var iban  = document.getElementById('inp-iban').value.trim();
+  var phone = document.getElementById('inp-phone').value.trim();
+  updateDashboard(c, t);
+  if (iban)  { document.getElementById('iban-val').textContent = iban; generateQR(iban); }
+  if (phone) { document.getElementById('contact-phone').textContent = phone; }
+  closeAdmin();
+}
+
+function generateQR(text) {
+  var wrap = document.getElementById('qr-canvas');
+  wrap.innerHTML = '';
+  try { new QRCode(wrap, { text:text, width:130, height:130, colorDark:'#1a0a00', colorLight:'#ffffff', correctLevel: QRCode.CorrectLevel.M }); } catch(e) {}
+}
+
+initDots();
+renderQuote(0);
+updateDashboard(24, 200);
+generateQR('IE BIK 1234 5343432 — Azakhana e Zahra S.A. Dublin');
+setInterval(function(){ qIdx=(qIdx+1)%quotes.length; renderQuote(qIdx); }, 8000);
+</script>
+</body>
+</html>
